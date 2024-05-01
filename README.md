@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Shout Test
         id: shout-test
-        uses: education/autograding-io-grader@v1
+        uses: classroom-resources/autograding-io-grader@v1
         with:
           test-name: Shout Test
           command: "./test/bin/shout.sh"
@@ -47,7 +47,7 @@ jobs:
           max-score: 10
       - name: A command test
         id: a-command-test
-        uses: education/autograding-command-grader@v1
+        uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: A command test
           setup-command: bundle install
@@ -56,10 +56,10 @@ jobs:
           max-score: 20
       - name: Python test
         id: python-test
-        uses: education/autograding-python-grader@v1
+        uses: classroom-resources/autograding-python-grader@v1
       - name: Python test with score
         id: python-test-with-score
-        uses: education/autograding-python-grader@v1
+        uses: classroom-resources/autograding-python-grader@v1
         with:
           max-score: 30
       - name: Autograding Reporter
