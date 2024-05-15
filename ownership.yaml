@@ -1,0 +1,20 @@
+version: 1
+ownership:
+- name: autograding-grading-reporter
+  tier: 2
+  description: A plugin for GitHub Classroom's Autograder. Usee to report the results of the test execution to students and GitHub Classroom.
+  kind: artifact
+  team: github/classroom
+  team_slack: edu-classroom
+  product_manager: ryanhecht
+  repo: https://github.com/classroom-resources/autograding-grading-reporter
+  sev1:
+    issue: https://github.com/classroom-resources/autograding-grading-reporter/issues
+    tta: '1 business day'
+  sev2:
+    issue: https://github.com/classroom-resources/autograding-grading-reporter/issues
+    tta: '1 week'
+  sev3:
+    issue: https://github.com/classroom-resources/autograding-grading-reporter/issues
+    tta: '1 week'
+  qos: maintenance
