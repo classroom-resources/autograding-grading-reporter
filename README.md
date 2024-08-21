@@ -9,6 +9,12 @@
 - **Flexible Output Comparison**: Supports multiple methods to compare the stdout output.
 - **Timeout Control**: Limit the runtime of tests to prevent excessive resource usage.
 
+### Environment Variables
+
+| Env Name | Description | Required |
+|----------|-------------|----------|
+| [RUNNER-ID]_RESULTS | The name is equal to the ID of the runner in all capitals followed by `_RESULTS` and the value is the result output from the runner. | Yes |
+
 ### Inputs
 
 | Input Name | Description | Required |
