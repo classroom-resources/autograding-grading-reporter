@@ -35,7 +35,7 @@ permissions:
   actions: read
   contents: read
 jobs:
-  autograding:
+  run-autograding-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -69,7 +69,7 @@ jobs:
         with:
           max-score: 30
       - name: Autograding Reporter
-        uses: ./
+        uses: classroom-resources/autograding-grading-reporter@v1
         env:
           SHOUT-TEST_RESULTS: "${{steps.shout-test.outputs.result}}"
           A-COMMAND-TEST_RESULTS: "${{steps.a-command-test.outputs.result}}"
@@ -77,6 +77,24 @@ jobs:
           PYTHON-TEST-WITH-SCORE_RESULTS: "${{steps.python-test-with-score.outputs.result}}"
         with:
           runners: shout-test,a-command-test,python-test,python-test-with-score
+```
+  Some key aspects in the above example must be respected, to let the action correctly report the results to Classroom, which are important if the workflow is handwritten:
+
+  1. The name of the workflow _must_ be `Autograding Tests`, no other name is allowed;
+  2. The workflow can only have one job, and the job must be named `run-autograding-tests`;
+  3. The workflow must be the first to be completed in the CI environment.
+
+If any of these conditions are not met, some incorrect results will be reported. In particular, if points 1/2 above are not met, no scores will be uploaded to Classroom. If any other workflow completes as the first, an incorrect "passed" status will be reported.
+
+Point 3 above can be challenging to meet, due to the concurrent nature of workflows. If other workflows are needed (for example, to respond to pull requests or to report in any other way to students), they should not be triggered on push. A possibility is to trigger the other workflows based on the completion of the autograding reporter one, as such:
+
+```yaml
+name: Other workflow after autograding
+on:
+  workflow_run:
+    workflows: [Autograding Tests]
+    types:
+      - completed
 ```
 
 ### Example Output
