@@ -19,9 +19,14 @@ exports.NotifyClassroom = async function NotifyClassroom(runnerResults) {
   if (!maxPoints) return;
 
   const text = `Points ${totalPoints}/${maxPoints}`;
+  const summary = JSON.stringify({ totalPoints, maxPoints })
 
-  // create a notice annotation with the final result
+  // create notice annotations with the final result and summary
   core.notice(text, {
     title: "Autograding complete",
+  })
+
+  core.notice(summary, {
+    title: "Autograding report",
   })
 };
