@@ -31,7 +31,6 @@ on:
   - push
   - workflow_dispatch
 permissions:
-  checks: write
   actions: read
   contents: read
 jobs:
