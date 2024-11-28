@@ -1,3 +1,4 @@
+const core = require("@actions/core");
 const { COLORS } = require("./colors");
 const Table = require("cli-table3");
 const { getTotalMaxScore, getTestWeight, getTestScore, totalPercentageReducer, getMaxScoreForTest } = require("./helpers/test-helpers");
@@ -36,6 +37,11 @@ function AggregateResults(runnerResults) {
     table.push(["Total: ", `${totalTestScores}`, `${totalMaxScores}`]);
     
     console.log(table.toString());
+
+    // Set number of points
+    if (totalMaxScores > 0) {
+      core.setOutput('Points', `${totalTestScores}/${totalMaxScores}`);
+    }
   } catch (error) {
     throw new Error(error.message);
   }
