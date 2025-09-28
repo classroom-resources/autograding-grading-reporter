@@ -73,6 +73,48 @@ test('test runs with multiple runners', () => {
   expect(stdout).toContain('✅')
 })
 
+test('test runs with multiple runners with comma and newline', () => {
+  process.env.RESULT1_RESULTS = Buffer.from(
+    '{ "tests": [{ "name": "Test 1", "status": "pass", "message": null }] }',
+  ).toString('base64')
+  process.env.RESULT2_RESULTS = Buffer.from(
+    '{ "tests": [{ "name": "Test 2", "status": "pass", "message": null }] }',
+  ).toString('base64')
+  process.env.INPUT_RUNNERS = 'result1,\nresult2'
+
+  const child = cp.spawnSync(node, [ip], options)
+  const stdout = child.stdout.toString()
+  console.log(stdout)
+  expect(stdout).toContain('✅')
+})
+test('test runs with multiple runners with comma and space', () => {
+  process.env.RESULT1_RESULTS = Buffer.from(
+    '{ "tests": [{ "name": "Test 1", "status": "pass", "message": null }] }',
+  ).toString('base64')
+  process.env.RESULT2_RESULTS = Buffer.from(
+    '{ "tests": [{ "name": "Test 2", "status": "pass", "message": null }] }',
+  ).toString('base64')
+  process.env.INPUT_RUNNERS = ' result1, result2 '
+
+  const child = cp.spawnSync(node, [ip], options)
+  const stdout = child.stdout.toString()
+  console.log(stdout)
+  expect(stdout).toContain('✅')
+})
+test('test runs with multiple runners with random whitespace', () => {
+  process.env.RESULT1_RESULTS = Buffer.from(
+    '{ "tests": [{ "name": "Test 1", "status": "pass", "message": null }] }',
+  ).toString('base64')
+  process.env.RESULT2_RESULTS = Buffer.from(
+    '{ "tests": [{ "name": "Test 2", "status": "pass", "message": null }] }',
+  ).toString('base64')
+  process.env.INPUT_RUNNERS = '\n\tresult1 \nresult2 \n'
+
+  const child = cp.spawnSync(node, [ip], options)
+  const stdout = child.stdout.toString()
+  console.log(stdout)
+  expect(stdout).toContain('✅')
+})
 test('test fails with multiple runners', () => {
   process.env.RESULT1_RESULTS = Buffer.from(
     '{ "tests": [{ "name": "Test 1", "status": "fail", "message": null }] }',

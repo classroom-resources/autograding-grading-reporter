@@ -5,7 +5,8 @@ const { NotifyClassroom } = require("./notify-classroom");
 try {
   const runnerResults = core
     .getInput("runners")
-    .split(",")
+    .split(/[\s,]/)
+    .filter(Boolean)
     .map((runner) => {
       const encodedResults = process.env[`${runner.trim().toUpperCase()}_RESULTS`];
       const json = Buffer.from(encodedResults, "base64").toString("utf-8");
