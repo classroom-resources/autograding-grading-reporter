@@ -14,7 +14,7 @@ const getTestScore = (runnerResult) => {
     return status === "pass" ? acc + 1 : acc;
   }, 0);
 
-  return (score / tests.length) * (getMaxScoreForTest(runnerResult) || 0);
+  return ((score / tests.length) * getMaxScoreForTest(runnerResult)) || 0;
 };
 
 const getTestWeight = (maxScore, allMaxScores) => {
