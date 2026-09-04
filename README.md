@@ -1,5 +1,8 @@
 ## GitHub Classroom Autograding Reporter
 
+> ⚠️ **WARNING** ⚠️
+> The GitHub Classroom application has been sunset so this plugin is deprecated. For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
+
 ### Overview
 **GitHub Classroom Autograding Reporter** is a plugin for GitHub Classroom's Autograder. Use it to report the results of the test execution to students and GitHub Classroom.
 
